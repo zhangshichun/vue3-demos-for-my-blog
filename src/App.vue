@@ -1,9 +1,24 @@
 <template>
-  <div>联动组件demo:</div>
-  <LinkagePage/>
+  <div>
+    Demos:
+    <el-tabs type="card" v-model="activeTab">
+      <el-tab-pane label="多级联动" name="LinkagePage">
+        <LinkagePage />
+      </el-tab-pane>
+      <el-tab-pane label="withLoading" name="WithLoadingPage">
+        <WithLoading />
+      </el-tab-pane>
+      <!-- <el-tab-pane label="Role">Role</el-tab-pane>
+      <el-tab-pane label="Task">Task</el-tab-pane> -->
+    </el-tabs>
+    
+  </div>
+
 </template>
 
 <script setup>
+import { ref } from 'vue';
+const activeTab = ref('LinkagePage')
 import LinkagePage from './demos/linkage'
-
+import WithLoading from './demos/with-loading'
 </script>
