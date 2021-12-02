@@ -1,6 +1,6 @@
 <template>
   <div>
-    <test :path="xiuxianImg" :colorCount="4" :unitPx="4"></test>
+    <test :path="xiuxianImg" :colorCount="6" :unitPx="4"></test>
   </div>
   <div>
     <test :path="catImg" :colorCount="18" :unitPx="4"></test>

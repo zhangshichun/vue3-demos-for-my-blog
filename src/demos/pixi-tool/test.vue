@@ -172,7 +172,7 @@ const getImportantBossColor = (arr) => {
     const row = Math.floor(index/props.unitPx)
     const center = props.unitPx/2
     let baseNumber  = 1 + (center - col)*(center - col) + (center - row)*(center - row)
-    const score = Math.ceil(props.unitPx * props.unitPx / baseNumber) 
+    const score = Math.ceil(props.unitPx / baseNumber) 
     const id = genId(t)
     if (map[id] == null) {
       map[id] = 0
@@ -210,7 +210,7 @@ const handlePixelData = (imageData, handler) => {
     const countOfX = Math.ceil(canvasWidth.value/props.unitPx)
     const countOfY = Math.ceil(canvasHeight.value/props.unitPx)
     let originData = imageData.data;
-    let data_64_64 = Array(countOfX * countOfY);
+    let pixelArr = Array(countOfX * countOfY);
     for (var i = 0; i < originData.length; i += props.unitPx) {
       const color = {
         r: originData[i],
@@ -222,13 +222,13 @@ const handlePixelData = (imageData, handler) => {
       const x = Math.floor((i % (canvasWidth.value * 4))/(4 * props.unitPx));// 貌似不整的时候不能这么算
       const y = Math.floor( i / ( 4 * canvasWidth.value * props.unitPx))
       const index = x + countOfX * y
-      const arr = data_64_64[index] ?? []
+      const arr = pixelArr[index] ?? []
       arr.push(color)
-      data_64_64[index] = arr;
+      pixelArr[index] = arr;
     }
-    const avg_64_64 = data_64_64.map(handler)
+    const handledArr = pixelArr.map(handler)
     const data = new Uint8ClampedArray(256*256*4);
-    avg_64_64.forEach((t, i)=> {
+    handledArr.forEach((t, i)=> {
       const row = Math.floor(i / countOfX)
       const col = i % countOfX;
       const beginColIndex = col * props.unitPx * 4
